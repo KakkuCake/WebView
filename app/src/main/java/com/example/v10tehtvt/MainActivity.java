@@ -21,18 +21,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    private ProgressBar progressbar;
     private ImageView imageview;
     private WebView webview;
     private EditText editText;
-    int count = 1;
+    int counter = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        imageview = (ImageView) findViewById(R.id.imageview);
         webview = (WebView) findViewById(R.id.webview);
         editText =  findViewById(R.id.editText);
 
@@ -40,22 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
         webview.getSettings().setJavaScriptEnabled(true);
         webview.setWebViewClient(new WebViewClient());
-        webview.setWebChromeClient(new WebChromeClient(){
+        webview.setWebChromeClient(new WebChromeClient());
 
-            @Override
-            public void onReceivedTitle(WebView view, String title) {
-                super.onReceivedTitle(view, title);
-                getSupportActionBar().setTitle(title);
-            }
-
-            @Override
-            public void onReceivedIcon(WebView view, Bitmap icon) {
-                super.onReceivedIcon(view, icon);
-                imageview.setImageBitmap(icon);
-            }
-        });
-
-        webview.loadUrl("file:///android_asset/index.html");
 
     }
 
@@ -105,18 +89,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void executeJavaScript(View b){
+    public void executeJavaScript(View v){
 
-        if (count % 2 == 0) {
+        if (counter% 2 == 0) {
             webview.evaluateJavascript("javascript:initialize()", null);
         } else {
             webview.evaluateJavascript("javascript:shoutOut()", null);
         }
-        count++;
+        counter++;
     }
 
-    public void openUrl(View a){
+    public void openUrl(View w){
         String address = editText.getText().toString();
-        webview.loadUrl("http://" + address);
+        if (address.equals("index.html")) {
+            webview.loadUrl("file:///android_asset/index.html");
+        } else {
+            webview.loadUrl("http://" + address);
+        }
     }
 }

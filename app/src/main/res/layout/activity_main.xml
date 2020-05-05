@@ -6,28 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-    
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="30dp">
-        
-        <ProgressBar
-            android:id="@+id/progressbar"
-            android:layout_weight="0.1"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <ImageView
-            android:id="@+id/imageview"
-            android:src="@mipmap/ic_launcher"
-            android:layout_weight="0.9"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-
-    </LinearLayout>
 
     <WebView
         android:id="@+id/webview"
